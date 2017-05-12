@@ -7,7 +7,6 @@ Created on May 12, 2017
 from typing import List
 from waypoint import Waypoint
 import csv
-import waypoint
 
 class PathReader(object):
     '''
