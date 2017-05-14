@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name="pypurepursuit", 
-      version='0.0.3', 
+      version='0.0.5', 
       description="Pure Pursuit controller based on FRC Team 254's code", 
       url="https://github.com/DrWateryCat/pypurepursuit", 
       author="Kenny Raisbeck",
