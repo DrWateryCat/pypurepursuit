@@ -20,10 +20,10 @@ class RigidTransform2D(interpolable.Interpolable):
         dY = 0
         dTheta = 0
         
-        def __init__(self, dX=0, dY=0, dZ=0):
+        def __init__(self, dX=0, dY=0, dTheta=0):
             self.dX = dX
             self.dY = dY
-            self.dZ = dZ
+            self.dTheta = dTheta
         
     def __init__(self, translation: Translation2D=None, rotation: Rotation2D=None, other: RigidTransform2D=None):
         self.translation = translation
