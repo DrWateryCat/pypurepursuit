@@ -25,7 +25,7 @@ class RigidTransform2D(interpolable.Interpolable):
             self.dY = dY
             self.dTheta = dTheta
         
-    def __init__(self, translation: Translation2D=None, rotation: Rotation2D=None, other: RigidTransform2D=None):
+    def __init__(self, translation: Translation2D=None, rotation: Rotation2D=None, other: 'RigidTransform2D'=None):
         self.translation = translation
         self.rotation = rotation
         

@@ -13,13 +13,13 @@ class Translation2D(interpolable.Interpolable):
     '''
 
 
-    def __init__(self, x=0, y=0, other=None):
+    def __init__(self, x=0, y=0, other: 'Translation2D'=None):
         self.x = x
         self.y = y
         
         if other is not None and isinstance(other, Translation2D):
             self.x = other.x
-            self.y = other.x
+            self.y = other.y
             
     def normalize(self):
         return math.hypot(self.x, self.y)

@@ -13,7 +13,7 @@ class Rotation2D(interpolable.Interpolable):
     
     kEpsilon = 1e-9
 
-    def __init__(self, x=1, y=0, normalize=False, other: Rotation2D=None):
+    def __init__(self, x=1, y=0, normalize=False, other: 'Rotation2D'=None):
         '''
         Constructor
         '''
