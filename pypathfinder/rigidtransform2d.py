@@ -3,12 +3,12 @@ Created on May 9, 2017
 
 @author: kenny
 '''
-import interpolable
-from translation2D import Translation2D
-from rotation2D import Rotation2D
+from .interpolable import Interpolable
+from .translation2D import Translation2D
+from .rotation2D import Rotation2D
 import math
 
-class RigidTransform2D(interpolable.Interpolable):
+class RigidTransform2D(Interpolable):
     '''
     classdocs
     '''
@@ -25,7 +25,7 @@ class RigidTransform2D(interpolable.Interpolable):
             self.dY = dY
             self.dTheta = dTheta
         
-    def __init__(self, translation: Translation2D=None, rotation: Rotation2D=None, other: 'RigidTransform2D'=None):
+    def __init__(self, translation: 'Translation2D'=None, rotation: 'Rotation2D'=None, other: 'RigidTransform2D'=None):
         self.translation = translation
         self.rotation = rotation
         
@@ -34,15 +34,15 @@ class RigidTransform2D(interpolable.Interpolable):
             self.rotation = other.rotation
             
     @staticmethod
-    def from_translation(trans: Translation2D):
+    def from_translation(trans: 'Translation2D'):
         return RigidTransform2D(translation=trans, rotation=Rotation2D())
     
     @staticmethod
-    def from_rotation(rot: Rotation2D):
+    def from_rotation(rot: 'Rotation2D'):
         return RigidTransform2D(translation=Translation2D(), rotation=rot)
     
     @staticmethod
-    def from_velocity(delta: RigidTransform2D.Delta):
+    def from_velocity(delta: 'RigidTransform2D.Delta'):
         sin_theta = math.sin(delta.dTheta)
         cos_theta = math.cos(delta.dTheta)
         
@@ -64,7 +64,7 @@ class RigidTransform2D(interpolable.Interpolable):
     def get_rotation(self):
         return self.rotation
     
-    def transformby(self, other: RigidTransform2D):
+    def transformby(self, other: 'RigidTransform2D'):
         return RigidTransform2D(translation=self.translation.translate_by(other.translation.rotate_by(self.rotation)),
                                 rotation=self.rotation.rotate_by(other.rotation))
         

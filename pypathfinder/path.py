@@ -2,10 +2,10 @@
 Created on May 9, 2017
 '''
 from builtins import set
-from pathsegment import PathSegment
+from .pathsegment import PathSegment
 from typing import List
-from translation2D import Translation2D
-from waypoint import Waypoint
+from .translation2D import Translation2D
+from .waypoint import Waypoint
 
 import math
 
@@ -23,12 +23,11 @@ class Path:
         '''
         self.markers_crossed = set()
         self.waypoints = waypoints
-        self.segments = List[PathSegment]
+        self.segments = list()
         
-        for i, _ in enumerate(waypoints):
-            self.segments.append(PathSegment(start=waypoints[i].position, 
-                                             end=waypoints[i+1].position, 
-                                             speed=waypoints[i].speed))
+        for i in range(0, len(waypoints) - 1, 1):
+            seg = PathSegment(start=waypoints[i].position, end=waypoints[i+1].position, speed=waypoints[i].speed)
+            self.segments.append(seg)
             
         if len(waypoints) > 0:
             first_waypoint = self.waypoints.pop(0)

@@ -25,7 +25,7 @@ class InterpolatingDict(OrderedDict):
             top_bound = self.ceil_key(key)
             low_bound = self.floor_key(key)
             
-            if top_bound is not None and low_bound is not None:
+            if top_bound is None and low_bound is None:
                 return None
             elif top_bound is None:
                 return self.get(low_bound)

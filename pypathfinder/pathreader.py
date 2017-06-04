@@ -5,7 +5,7 @@ Created on May 12, 2017
 '''
 
 from typing import List
-from waypoint import Waypoint
+from .waypoint import Waypoint
 import csv
 
 class PathReader(object):

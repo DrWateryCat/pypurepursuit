@@ -4,11 +4,11 @@ Created on May 10, 2017
 @author: kenny
 '''
 
-from path import Path
-from rigidtransform2d import RigidTransform2D
-from translation2D import Translation2D
-from rotation2D import Rotation2D
-from circle import Circle
+from .path import Path
+from .rigidtransform2d import RigidTransform2D
+from .translation2D import Translation2D
+from .rotation2D import Rotation2D
+from .circle import Circle
 import math
 
 class AdaptivePurePursuitController:

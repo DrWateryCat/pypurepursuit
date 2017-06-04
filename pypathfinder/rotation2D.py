@@ -3,10 +3,10 @@ Created on May 9, 2017
 
 @author: kenny
 '''
-import interpolable
+from .interpolable import Interpolable
 import math
 
-class Rotation2D(interpolable.Interpolable):
+class Rotation2D(Interpolable):
     '''
     classdocs
     '''
@@ -58,7 +58,7 @@ class Rotation2D(interpolable.Interpolable):
     def get_degrees(self):
         return math.degrees(self.get_radians())
     
-    def rotate_by(self, other: Rotation2D):
+    def rotate_by(self, other: 'Rotation2D'):
         return Rotation2D(x=(self.cos_angle * other.cos_angle - self.sin_angle * other.sin_angle),
                           y=(self.cos_angle * other.sin_angle + self.sin_angle * other.cos_angle),
                           normalize=True)
@@ -66,7 +66,7 @@ class Rotation2D(interpolable.Interpolable):
     def inverse(self):
         return Rotation2D(x=self.cos_angle, y=-self.sin_angle)
     
-    def interpolate(self, other: interpolable.Interpolable, x):
+    def interpolate(self, other: Interpolable, x):
         if x <= 0:
             return Rotation2D(other=self)
         elif x >= 1:
