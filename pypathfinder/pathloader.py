@@ -1,9 +1,3 @@
-'''
-Created on May 12, 2017
-
-@author: kenny
-'''
-
 from typing import List
 from .waypoint import Waypoint
 

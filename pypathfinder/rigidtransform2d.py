@@ -1,8 +1,3 @@
-'''
-Created on May 9, 2017
-
-@author: kenny
-'''
 from .interpolable import Interpolable
 from .translation2D import Translation2D
 from .rotation2D import Rotation2D

@@ -1,9 +1,3 @@
-'''
-Created on May 9, 2017
-
-@author: kenny
-'''
-
 class Interpolable:
     '''
     classdocs

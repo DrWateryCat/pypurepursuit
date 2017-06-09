@@ -1,6 +1,3 @@
-'''
-Created on May 9, 2017
-'''
 from builtins import set
 from .pathsegment import PathSegment
 from typing import List

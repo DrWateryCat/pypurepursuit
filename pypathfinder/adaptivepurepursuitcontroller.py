@@ -1,9 +1,3 @@
-'''
-Created on May 10, 2017
-
-@author: kenny
-'''
-
 from .path import Path
 from .rigidtransform2d import RigidTransform2D
 from .translation2D import Translation2D

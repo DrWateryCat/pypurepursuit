@@ -1,8 +1,3 @@
-'''
-Created on May 13, 2017
-
-@author: kenny
-'''
 from collections import OrderedDict
 
 class InterpolatingDict(OrderedDict):

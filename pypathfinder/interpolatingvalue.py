@@ -1,8 +1,3 @@
-'''
-Created on May 13, 2017
-
-@author: kenny
-'''
 from .interpolable import Interpolable
 from .inverseinterpolable import InverseInterpolable
 

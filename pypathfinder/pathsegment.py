@@ -1,8 +1,3 @@
-'''
-Created on May 10, 2017
-
-@author: kenny
-'''
 from .translation2D import Translation2D
 import math
 
