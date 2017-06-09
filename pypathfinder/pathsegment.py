@@ -14,7 +14,7 @@ class PathSegment(object):
     kEpsilon = 1e-9
     
     class Sample:
-        def __init__(self, translation: Translation2D, speed=0):
+        def __init__(self, translation: Translation2D, speed: float=0):
             self.translation = translation
             self.speed = speed
             

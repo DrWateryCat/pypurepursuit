@@ -55,7 +55,7 @@ class Path:
                 rv = closest_point_report.distance
                 
                 try:
-                    _next = it.next()
+                    _next = next(it)
                     next_closest_point_report = _next.get_closest_point()
                     
                     if next_closest_point_report.index > 0 and next_closest_point_report.index < self.kCompletedPercentage and next_closest_point_report.distance < rv:
@@ -80,8 +80,9 @@ class Path:
         length = 0.0
         for i in self.segments:
             length += i.length
+        return length
             
-    def get_lookahead_point(self, position: Translation2D, lookahead_distance):
+    def get_lookahead_point(self, position: Translation2D, lookahead_distance) -> PathSegment.Sample:
         if len(self.segments) == 0:
             return PathSegment.Sample(Translation2D(), speed=0)
         
@@ -89,6 +90,7 @@ class Path:
         pos_inverse = position.inverse()
         if pos_inverse.translate_by(self.segments[0].start).normalize() >= lookahead_distance:
             #Just return the first point
+            #print ("Returning first point")
             return PathSegment.Sample(self.segments[0].start, self.segments[0].speed)
         
         for segment in self.segments:
@@ -98,6 +100,7 @@ class Path:
                 intersection_point = self.get_first_circle_segment_intersection(segment, position, lookahead_distance)
                 
                 if intersection_point is not None:
+                    #print ("Return intersection point")
                     return PathSegment.Sample(intersection_point, segment.speed)
                 else:
                     print("ERROR: No Intersection point?")
@@ -109,6 +112,7 @@ class Path:
         intersection_point = self.get_first_circle_segment_intersection(new_last_segment, position, lookahead_distance)
         
         if intersection_point is not None:
+            #print ("Returning circle intersection")
             return PathSegment.Sample(intersection_point, last_segment.speed)
         else:
             print("ERROR: No intersection point anywhere on the line?")

@@ -25,22 +25,34 @@ class Translation2D(Interpolable):
         return math.hypot(self.x, self.y)
     
     def translate_by(self, other: 'Translation2D'):
-        return Translation2D(self.x + other.x, self.y + other.y)
+        try:
+            return Translation2D(self.x + other.x, self.y + other.y)
+        except:
+            return self
     
     def rotate_by(self, other: 'Rotation2D'):
-        return Translation2D(x=(self.x * other.cos() - self.y * other.sin()),
-                             y=(self.x * other.sin() + self.y * other.cos()))
+        try:
+            return Translation2D(x=(self.x * other.cos() - self.y * other.sin()),
+                                 y=(self.x * other.sin() + self.y * other.cos()))
+        except:
+            return self
         
     def inverse(self):
         return Translation2D(x=-self.x, y=-self.y)
     
     def interpolate(self, other: 'Translation2D', x):
-        if x <= 0:
-            return Translation2D(other=self)
-        elif x >= 0:
-            return Translation2D(other=other)
-        return self.extrapolate(other, x)
+        try:
+            if x <= 0:
+                return Translation2D(other=self)
+            elif x >= 0:
+                return Translation2D(other=other)
+            return self.extrapolate(other, x)
+        except:
+            return self
     
     def extrapolate(self, other: 'Translation2D', x_):
-        return Translation2D(x=(x_ * (other.x * self.x) + self.x),
-                             y=(x_ * (other.y - self.y) + self.y))
+        try:
+            return Translation2D(x=(x_ * (other.x * self.x) + self.x),
+                                 y=(x_ * (other.y - self.y) + self.y))
+        except:
+            return self

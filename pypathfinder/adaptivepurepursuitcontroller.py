@@ -39,43 +39,45 @@ class AdaptivePurePursuitController:
             pose = RigidTransform2D(translation=robot_pose.get_translation(),
                                     rotation=robot_pose.get_rotation().rotate_by(Rotation2D.from_radians(math.pi)))
         
-        distance_from_path = self.path.update(robot_pose.get_translation())
+        distance_from_path = self.path.update(pose.get_translation())
         if self.is_done():
             return RigidTransform2D.Delta()
         
-        lookahead_point = self.path.get_lookahead_point(robot_pose.get_translation(), distance_from_path + self.fixed_lookahead)
+        lookahead_point = self.path.get_lookahead_point(pose.get_translation(), distance_from_path + self.fixed_lookahead)
         circle = AdaptivePurePursuitController.join_path(pose, lookahead_point.translation)
         
-        speed = lookahead_point.speed
+        velocity = lookahead_point.speed
+        #print (str(lookahead_point))
+        #print (str(type(velocity)))
         if self.reversed:
-            speed *= -1
+            velocity *= -1
             
         dT = now - self.last_time
         if self.last_command is None:
             self.last_command = RigidTransform2D.Delta()
             dT = self.dT
             
-        accel = (speed - self.last_command.dX) / dT
+        accel = (velocity - self.last_command.dX) / dT
         if accel < -self.max_accel:
-            speed = self.last_command.dX - self.max_accel * dT
+            velocity = self.last_command.dX - self.max_accel * dT
         elif accel > self.max_accel:
-            speed = self.last_command + self.max_accel * dT
+            velocity = self.last_command + self.max_accel * dT
             
         remaining_distance = self.path.get_remaining_length()
         max_allowed_speed = math.sqrt(2 * self.max_accel * remaining_distance)
         
-        if abs(speed) > max_allowed_speed:
-            speed = max_allowed_speed * math.copysign(1, speed)
+        if abs(velocity) > max_allowed_speed:
+            velocity = max_allowed_speed * math.copysign(1, velocity)
             
-        if abs(speed) < self.kMinSpeed:
-            speed = self.kMinSpeed * math.copysign(1, speed)
+        if abs(velocity) < self.kMinSpeed:
+            velocity = self.kMinSpeed * math.copysign(1, velocity)
             
         rv = None
         if circle is not None:
-            rv = RigidTransform2D.Delta(speed, 0, 
-                                        (-1 if circle.turn_right else 1) * abs(speed) / circle.radius)
+            rv = RigidTransform2D.Delta(velocity, 0, 
+                                        (-1 if circle.turn_right else 1) * abs(velocity) / circle.radius)
         else:
-            rv = RigidTransform2D.Delta(speed)
+            rv = RigidTransform2D.Delta(velocity)
             
         self.last_time = now
         self.last_command = rv
